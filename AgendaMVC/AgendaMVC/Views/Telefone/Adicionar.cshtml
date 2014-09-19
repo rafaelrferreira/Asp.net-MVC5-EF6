@@ -18,39 +18,47 @@
         </div>
     </fieldset>
 </form>
-<br />
-<form method="post" action="/Telefone/Adicionar">
-    <fieldset>
-        <legend>Preencha os campos</legend>
-        <div>
-            <input type="hidden" id="idContato" name="idContato" value="@ViewData["idContato"]" />
-        </div>
-        <div>
-            Número: <input type="text" id="telefone" name="telefone" />
-        </div>
-        <div>
-            <input type="submit" value="Enviar" />
-        </div>
-    </fieldset>
-</form>
 
-<table>
-    <tr>
-        <th>Telefone(s)</th>
-        <th>Apagar</th>
-    </tr>
-    @if(Model != null){
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.fone</td>
-            </tr>
-            <tr>
-                <td>@Html.ActionLink("delete", "Apagar", "Telefone", new { idTelefone = item.idTelefone }, null)</td>
-            </tr>
+<br />
+
+<div style="margin:  20px 0px 20px 0px;">
+    <form method="post" action="/Telefone/Adicionar">
+        <fieldset>
+            <legend>Preencha os campos</legend>
+            <div>
+                <input type="hidden" id="idContato" name="idContato" value="@ViewData["idContato"]" />
+            </div>
+            <div>
+                Número: <input type="text" id="telefone" name="telefone" />
+            </div>
+            <div style="margin-top: 10px;">
+                <input type="submit" value="Enviar" class="btn btn-primary" />
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<div class="clearfix"></div>
+
+<div style="width: 500px;">
+    <table class="table table-condesed table-stripped table-hover">
+        <tr>
+            <th>Telefone(s)</th>
+            <th>Apagar</th>
+        </tr>
+        
+        @if(Model != null){
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.fone</td>
+                    <td>@Html.ActionLink("delete", "Apagar", "Telefone", new { idTelefone = item.idTelefone }, null)</td>
+                </tr>
+            }
         }
-    }
-</table>
+        
+    </table>
+</div>
 
 <br />
 
