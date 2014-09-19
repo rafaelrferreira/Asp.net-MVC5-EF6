@@ -1,0 +1,34 @@
+﻿@model List<AgendaMVC.Models.Contato>
+@{
+    ViewBag.Title = "Listar";
+}
+
+<h2>Listar</h2>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Adicionar Telefone</th>
+        <th>Alterar</th>
+    </tr>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.nome
+        </td>
+        <td>
+            @item.empresa
+        </td>
+        <td>
+            @Html.ActionLink("Add", "Adicionar", "Telefone", new { idContato = item.idContato }, null)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Editar", "Contato", new { idContato = item.idContato }, null)
+        </td>
+    </tr>
+}
+</table>
+<div>
+    @Html.ActionLink("Voltar", "Inserir", "Contato")
+</div>

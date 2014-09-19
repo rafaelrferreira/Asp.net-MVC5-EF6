@@ -1,0 +1,36 @@
+﻿@model AgendaMVC.Models.Contato
+@{
+    ViewBag.Title = "Inserir";
+}
+
+<h2>Inserir</h2>
+
+@using (Html.BeginForm("Inserir", "Contato", FormMethod.Post))
+{
+    <fieldset>
+        @Html.ValidationSummary(true)
+        <legend>Dados do contato</legend>
+        <div>
+            @Html.LabelFor(model => model.nome)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.nome)
+            @Html.ValidationMessageFor(model => model.nome)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.empresa)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.empresa)
+        </div>
+
+        <div>
+            <input type="submit" value="Enviar" />
+        </div>
+    </fieldset>
+}
+
+<div>@ViewBag.Mensagem</div>
+<br />
+@Html.ActionLink("Voltar", "Listar", "Contato")

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbAgendaMVCModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="dbAgendaMVCModelStoreContainer">
+          <EntitySet Name="Contato" EntityType="dbAgendaMVCModel.Store.Contato" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Telefone" EntityType="dbAgendaMVCModel.Store.Telefone" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="R_1" Association="dbAgendaMVCModel.Store.R_1">
+            <End Role="Contato" EntitySet="Contato" />
+            <End Role="Telefone" EntitySet="Telefone" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Contato">
+          <Key>
+            <PropertyRef Name="idContato" />
+          </Key>
+          <Property Name="nome" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="idContato" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="empresa" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Telefone">
+          <Key>
+            <PropertyRef Name="idTelefone" />
+          </Key>
+          <Property Name="idContato" Type="int" Nullable="false" />
+          <Property Name="idTelefone" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="fone" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <Association Name="R_1">
+          <End Role="Contato" Type="dbAgendaMVCModel.Store.Contato" Multiplicity="1" />
+          <End Role="Telefone" Type="dbAgendaMVCModel.Store.Telefone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contato">
+              <PropertyRef Name="idContato" />
+            </Principal>
+            <Dependent Role="Telefone">
+              <PropertyRef Name="idContato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbAgendaMVCModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbAgendaMVCEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Contato" EntityType="dbAgendaMVCModel.Contato" />
+          <EntitySet Name="Telefone" EntityType="dbAgendaMVCModel.Telefone" />
+          <AssociationSet Name="R_1" Association="dbAgendaMVCModel.R_1">
+            <End Role="Contato" EntitySet="Contato" />
+            <End Role="Telefone" EntitySet="Telefone" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Contato">
+          <Key>
+            <PropertyRef Name="idContato" />
+          </Key>
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="idContato" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="empresa" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Telefone" Relationship="dbAgendaMVCModel.R_1" FromRole="Contato" ToRole="Telefone" />
+        </EntityType>
+        <EntityType Name="Telefone">
+          <Key>
+            <PropertyRef Name="idTelefone" />
+          </Key>
+          <Property Name="idContato" Type="Int32" Nullable="false" />
+          <Property Name="idTelefone" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="fone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Contato" Relationship="dbAgendaMVCModel.R_1" FromRole="Telefone" ToRole="Contato" />
+        </EntityType>
+        <Association Name="R_1">
+          <End Type="dbAgendaMVCModel.Contato" Role="Contato" Multiplicity="1" />
+          <End Type="dbAgendaMVCModel.Telefone" Role="Telefone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contato">
+              <PropertyRef Name="idContato" />
+            </Principal>
+            <Dependent Role="Telefone">
+              <PropertyRef Name="idContato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbAgendaMVCModelStoreContainer" CdmEntityContainer="dbAgendaMVCEntities">
+          <EntitySetMapping Name="Contato">
+            <EntityTypeMapping TypeName="dbAgendaMVCModel.Contato">
+              <MappingFragment StoreEntitySet="Contato">
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="idContato" ColumnName="idContato" />
+                <ScalarProperty Name="empresa" ColumnName="empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Telefone">
+            <EntityTypeMapping TypeName="dbAgendaMVCModel.Telefone">
+              <MappingFragment StoreEntitySet="Telefone">
+                <ScalarProperty Name="idContato" ColumnName="idContato" />
+                <ScalarProperty Name="idTelefone" ColumnName="idTelefone" />
+                <ScalarProperty Name="fone" ColumnName="fone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

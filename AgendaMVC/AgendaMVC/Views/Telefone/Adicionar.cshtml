@@ -1,0 +1,57 @@
+﻿@model List<AgendaMVC.Models.Telefone>
+@{
+    ViewBag.Title = "Adicionar";
+}
+
+<h2>Adicionar Telefone</h2>
+<form>
+    <fieldset>
+        <legend>Dados do contato</legend>
+        <div>
+            Código: @ViewData["codigo"]
+        </div>
+        <div>
+            Nome: @ViewData["nome"]
+        </div>
+        <div>
+            Empresa: @ViewData["empresa"]
+        </div>
+    </fieldset>
+</form>
+<br />
+<form method="post" action="/Telefone/Adicionar">
+    <fieldset>
+        <legend>Preencha os campos</legend>
+        <div>
+            <input type="hidden" id="idContato" name="idContato" value="@ViewData["idContato"]" />
+        </div>
+        <div>
+            Número: <input type="text" id="telefone" name="telefone" />
+        </div>
+        <div>
+            <input type="submit" value="Enviar" />
+        </div>
+    </fieldset>
+</form>
+
+<table>
+    <tr>
+        <th>Telefone(s)</th>
+        <th>Apagar</th>
+    </tr>
+    @if(Model != null){
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.fone</td>
+            </tr>
+            <tr>
+                <td>@Html.ActionLink("delete", "Apagar", "Telefone", new { idTelefone = item.idTelefone }, null)</td>
+            </tr>
+        }
+    }
+</table>
+
+<br />
+
+@Html.ActionLink("Voltar", "Listar", "Contato")
