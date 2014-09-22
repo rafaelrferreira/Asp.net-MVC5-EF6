@@ -1,0 +1,31 @@
+﻿@model AgendaMVC.Models.TelefoneV2
+@{
+    ViewBag.Title = "AdicionarV2";
+}
+
+@using (Html.BeginForm("AdicionarV2", "Telefone", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Inserir Telefone</legend>
+        
+        <div>
+            @Html.LabelFor(model => model.idContato)
+        </div>
+        
+        <div>
+            @Html.DropDownListFor(model => model.idContato, Model.lContatos)
+        </div>
+        
+        <div>
+            @Html.LabelFor(model => model.telefone)
+        </div>
+        
+        <div class="form-group">
+            @Html.EditorFor(model => model.telefone)
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <input type="submit" value="Enviar" class="btn btn-success" />
+        </div>
+    </fieldset>
+}

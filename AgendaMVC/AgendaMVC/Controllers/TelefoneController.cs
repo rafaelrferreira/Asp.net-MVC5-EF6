@@ -26,6 +26,42 @@ namespace AgendaMVC.Controllers
             return View(lFones);
         }
 
+        public ActionResult AdicionarV2()
+        {
+            TelefoneV2 telefonev2 = new TelefoneV2();
+            using (dbAgendaMVCEntities db = new dbAgendaMVCEntities())
+            {
+                var contatos = db.Contato.ToList();
+                telefonev2.lContatos = contatos.Select(x => new SelectListItem
+                                                                {
+                                                                    Value = x.idContato.ToString(),
+                                                                    Text = x.nome
+                                                                });
+            }
+            return View(telefonev2);
+        }
+
+        [HttpPost]
+        public ActionResult AdicionarV2(FormCollection form)
+        {
+            int idContato = Convert.ToInt32(form["idContato"]);
+            using (dbAgendaMVCEntities db = new dbAgendaMVCEntities())
+            {
+                Contato contato = new Contato();
+                contato = db.Contato.Find(idContato);
+                Telefone fone = new Telefone
+                {
+                    Contato = contato,
+                    fone = form["telefone"],
+                    idContato = contato.idContato,
+                    idTelefone = 0
+                };
+                db.Telefone.Add(fone);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Listar", "Contato");
+        }
+
         public ActionResult Apagar(int idTelefone)
         {
             int idCont = 0;

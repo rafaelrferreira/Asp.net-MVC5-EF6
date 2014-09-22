@@ -199,6 +199,7 @@
     <Compile Include="Models\Telefone.cs">
       <DependentUpon>AgendaEF.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TelefoneV2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +229,7 @@
     <Content Include="Views\Contato\Listar.cshtml" />
     <Content Include="Views\Telefone\Adicionar.cshtml" />
     <Content Include="Views\Contato\Editar.cshtml" />
+    <Content Include="Views\Telefone\AdicionarV2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
